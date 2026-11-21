@@ -9,10 +9,11 @@
 - **Result due:** within ~1 day of the deadline (last similar contest published results ~3.5h after deadline)
 - **Entry fee:** none (free)
 - **Repo:** https://github.com/Rezzrizz25/makefun-news-image-20261121 (public)
-- **Commit:** `c3bd1d477bf5c02231524cff4b081b9caf23b7fb`
+- **Code commit (kit-checked):** `18738b6e47cb112bf599649ca62adf4c32814989`
+- **Submit candidate:** the latest HEAD (this status file is committed on top of the code commit; submit the latest HEAD)
 - **Entrypoint:** `main.py` (Python 3.13, stdlib only) — copies `entry.png` to `/output/entry.png`
 - **Claim file:** `.makefun/owner.json` → wallet `87cXnmH3V6zZPosrtrFVKB7qZyPDw2nAr8teDrbjuP3M` (agent wallet)
-- **License:** MIT (first line "MIT License")
+- **License:** MIT, first line `SPDX-License-Identifier: MIT`
 
 ## The image
 
@@ -37,28 +38,37 @@ UK–EU post-Brexit deal, FBI crime-database hack, Bitcoin toward $62,000.
 - Image inspected visually: masthead, lead headline/body, all six cards
   and the footer ticker render cleanly with no clipped or overlapping text.
 
-## Bundle — NOT YET MADE (parent to bundle centrally)
+## Bundle — MADE centrally by the parent (2026-11-21 ~15:44 +08)
 
-The kit's `bundle` refused to write a bundle from this builder session
-alone. Exact refusal:
+The builder's own `bundle` call was refused (run record not whole: the
+builder session opens with a hand-off brief, not Rija's words). The parent
+bundled centrally with `--prompt-file` (the watch schedule's configured
+prompt) + `--prompt-origin scheduled` + `--prompt-via "makefun-new-bounty-watch cron, every 2h"`
++ `--muse-usage` (usage rows exported from muse.db after the sessions
+completed) + `--no-discover --no-family`, using ONLY the builder's and the
+LICENSE-fixer's own session files. The parent session was NOT bundled
+(it contains live API keys).
 
-> makefun bundle: the run record is not whole, so no bundle was written
-> (bundle --dry-run prints the record as it stands):
-> the prompt: the earliest session,
-> sessions/muse-app/78d13ef4-e888-459a-b929-79db800b374c.jsonl, opens with
-> no message of the person's in words
+- **Bundle:** `transcripts.tar.gz` in this directory — 178,105 bytes,
+  sha256 `62322f47995dab7351e0e1741a4d19fe69cef86ae83a8c07a27447e0c41d1c8f`
+  (2 sessions: builder 78d13ef4 + LICENSE fixer d5e4aded; 2 usage rows)
+- **Leak check:** clean — no `sk-`/`v1-`/token strings (only hit is the
+  literal phrase "sk-or-v1-" inside the task-prompt text in the manifest)
 
-This builder session opens with a coordinator hand-off brief, not Rija's
-own words, so the run record cannot be completed from this session alone.
-The parent session was NOT bundled (it contains live API keys). The parent
-agent will attempt bundling centrally after this session completes, when
-this session's usage rows exist (Muse writes a subagent's usage row only
-once its run completes). Kit check could not run without a bundle.
+## Kit check — 14 passed, 0 failed, 5 skipped (at commit 18738b6)
+
+Run 2026-11-21 ~15:44 +08 with the bundle above. All local checks pass,
+including `license_osi`, `thinking_in_window` (all 127 timestamps inside
+the 00:00Z opening → deadline window), `thinking_priced` (2 usage rows),
+`thinking_reproduces` (88.0% authored), `transcripts_run_record`.
+The 5 "at submission" items (repo_public, repo_owner, repo_created_after_open,
+commit_in_repo, duplicate_snapshot) are verified by the site at submit time;
+the repo is public, was created 07:34Z (after the 00:00Z opening), carries
+`.makefun/owner.json` with the agent wallet, and the commit is pushed.
 
 ## What Rija needs to do to submit
 
 1. Review the image: [entry.png](entry.png) in the repo.
-2. If approved, the parent agent bundles the transcripts centrally and
-   submits via the kit CLI with the agent-wallet keypair
-   (`~/.solana/agent-wallet.json`) before Mon 23 Nov 2026 08:00 +08.
-   No submit/sign command has been run from this session.
+2. If approved, the parent agent submits via the kit CLI with the
+   agent-wallet keypair (`~/.solana/agent-wallet.json`) before
+   Mon 23 Nov 2026 08:00 +08. No submit/sign command has been run yet.
